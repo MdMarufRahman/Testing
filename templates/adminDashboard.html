@@ -1,0 +1,389 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome CSS -->
+	
+	<!-- My CSS -->
+	<link rel="stylesheet" href="{% static 'style.css' %}">
+
+	<style>
+		/* Style for the track button */
+		.track-button {
+		  background-color: #4CAF50; /* Green */
+		  border: none;
+		  color: white;
+		  padding: 10px 20px;
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  font-size: 16px;
+		  margin: 4px 2px;
+		  cursor: pointer;
+		  border-radius: 8px;
+		  transition-duration: 0.4s;
+		}
+	  
+		/* Hover effect */
+		.track-button:hover {
+		  background-color: #037609; /* Darker green */
+		}
+
+		.restaurant-table {
+    		width: 100%;
+    		border-collapse: collapse;
+		}
+
+		.restaurant-table th, .restaurant-table td {
+    		border: 1px solid #ddd;
+    		padding: 8px;
+		}
+
+		.restaurant-table th {
+    		background-color: #f2f2f2;
+    		text-align: left;
+		}
+		.delete-button {
+        background-color: #dc3545; /* Red background color */
+        border: none;
+        color: white;
+        padding: 8px 16px; /* Padding to increase button size */
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 14px;
+        border-radius: 4px; /* Rounded corners */
+        cursor: pointer;
+        transition: background-color 0.3s; /* Smooth transition on hover */
+    }
+
+    .delete-button:hover {
+        background-color: #c97d1a; /* Darker red on hover */
+    }
+	.button {
+  position: relative;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid #34974d;
+  background-color: #3aa856;
+}
+
+.button, .button__icon, .button__text {
+  transition: all 0.3s;
+}
+
+.button .button__text {
+  transform: translateX(30px);
+  color: #fff;
+  font-weight: 600;
+}
+
+.button .button__icon {
+  position: absolute;
+  transform: translateX(109px);
+  height: 100%;
+  width: 39px;
+  background-color: #34974d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button .svg {
+  width: 30px;
+  stroke: #fff;
+}
+
+.button:hover {
+  background: #34974d;
+}
+
+.button:hover .button__text {
+  color: transparent;
+}
+
+.button:hover .button__icon {
+  width: 148px;
+  transform: translateX(0);
+}
+
+.button:active .button__icon {
+  background-color: #2e8644;
+}
+
+.button:active {
+  border: 1px solid #2e8644;
+}
+	  </style>
+	
+
+	<title>FlameShield_Dashboard</title>
+</head>
+<body>
+
+
+	<!-- SIDEBAR -->
+	<section id="sidebar">
+		<a href="#" class="brand">
+			<!-- <i class='bx bxs-smile'></i> -->
+			<img src="/static/logo.jpg" height="60">
+			<span class="text">FlameShield</span>
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="#">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text">Dashboard</span>
+				</a>
+			</li>
+			<li>
+				<a href="/log/">
+					<i class='bx bxs-shopping-bag-alt' ></i>
+					<span class="text">Log/History</span>
+				</a>
+			</li>
+			<li>
+				<a href="https://www.google.com/maps" target="_blank">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">Map</span>
+				</a>
+			</li>
+			<li>
+				<a href="/displayContact/">
+					<i class='bx bxs-message-dots' ></i>
+					<span class="text">Contact Request</span>
+				</a>
+			</li>
+			<li>
+				<a href="/addTeam/">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Available Team</span>
+				</a>
+			</li>
+		</ul>
+		<ul class="side-menu">
+			<li>
+				<a href="/admin/">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Settings</span>
+				</a>
+			</li>
+			<li>
+				<a href="/" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+	<!-- SIDEBAR -->
+
+
+
+	<!-- CONTENT -->
+	<section id="content">
+		<!-- NAVBAR -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<a href="#" class="nav-link">Home</a>
+			<form action="{% url 'search_reports' %}" method="post">
+				{% csrf_token %}
+				<div class="form-input">
+					<input type="search" name="q" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			<a href="/displayContact/" class="notification">
+				<i class='bx bxs-bell' ></i>
+				<span class="num">{{notification_count}}</span>
+			</a>
+			<a href="#" class="profile">
+				<img src="/static/people.png">
+			</a>
+		</nav>
+		<!-- NAVBAR -->
+
+		<!-- MAIN -->
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1>Dashboard</h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#">Dashboard</a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Home</a>
+						</li>
+					</ul>
+				</div>
+				<a href="/safety/" class="btn-download">
+					<i class='bx bxs-cloud-download' ></i>
+					<span class="text">Safety Tips / Resources</span>
+				</a>
+			</div>
+
+			<ul class="box-info">
+				<li>
+					<i class='bx bxs-calendar-check' ></i>
+					<span class="text">
+						<h3>{{report_count}}</h3>
+						<p>Total Reports</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-group' ></i>
+					<span class="text">
+						<h3>{{user_count}}</h3>
+						<p>Total Users</p>
+					</span>
+				</li>
+				<li>
+					<i class='bx bxs-dollar-circle' ></i>
+					<span class="text">
+						<h3>{{certificates_count}}</h3>
+						<p>Certificates</p>
+					</span> 
+				</li>
+			</ul>
+
+
+			<div class="table-data">
+				<div class="order">
+					<div class="head">
+						<h3>Recent Reports</h3>
+						<i class='bx bx-search' ></i>
+						<i class='bx bx-filter' ></i>
+					</div>
+					<table>
+						<thead>
+							<tr>
+								<th>Location</th>
+								<th>Cause of Fire</th>
+								<th>Status</th>
+								<th>Track</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for i in reports %}
+							<tr>
+								
+								<td>
+									
+									<p>{{i.location}}</p>
+								</td>
+								<td>{{i.cause}}</td>
+								
+								
+								
+								<td>
+									
+									<div class="dropdown">
+										<button class="dropbtn">Resolve</button>
+										<form action ="{% url 'resolve' i.id %}" method="POST">
+											{% csrf_token %}
+											<input type="hidden" name="teamName" id="teamNameInput">
+										<div class="dropdown-content">
+											{% for team in availableTeam %}
+											
+											<button type="submit" onclick="submitForm('{{ team.name }}')">{{ team.name }}</button>
+											{% endfor %}
+										</div>
+									</form>
+									</div>
+									<script>
+										function submitForm(teamName) {
+											document.getElementById('teamNameInput').value = teamName;
+											document.getElementById('resolveForm').submit();
+										}
+										</script>
+								</td>
+
+								
+								
+								<form action ="{% url 'map' i.id %}" method="POST">
+									{% csrf_token %}
+									<td>
+										<span class="track-button">
+										  <i class="fas fa-map-marker-alt icon"></i>
+										  <input type="submit" name="track" value="Track" style="background-color: transparent; border: none; color: inherit; cursor: inherit;">
+										</span>
+									  </td>
+							</form>
+							</tr>
+						{% endfor %}
+							
+						</tbody>
+					</table>
+				</div>
+				<div class="todo">
+					<div class="head">
+						<h3>Fire Certification</h3>
+						<i class='bx bx-plus' ></i>
+						<i class='bx bx-filter' ></i>
+						
+					</div>
+					<a href="{% url 'addRestaurent' %}" class="button">
+						<span class="button__text">Add</span>
+						<span class="button__icon">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" height="24" fill="none" class="svg">
+								<line y2="19" y1="5" x2="12" x1="12"></line>
+								<line y2="12" y1="12" x2="19" x1="5"></line>
+							</svg>
+						</span>
+					</a>
+					
+					  
+					  <h3>Certificates List</h3>
+					  <table class="restaurant-table">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Issued By</th>
+								<th>Validation</th>
+								<th>Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for restaurant in restaurents %}
+							<tr>
+								<td>{{ restaurant.commpanyName }}</td>
+								<td>{{ restaurant.issuedBy }}</td>
+								<td>{{ restaurant.expiryDate }}</td>
+								<td>
+									<form method="POST" action="{% url 'deleteCertificate' restaurant.id %}">
+										{% csrf_token %}
+										<button type="submit" class="delete-button">Delete</button>
+									</form>
+								</td>
+								
+								
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					
+					
+				</div>
+				
+			</div>
+		</main>
+		<!-- MAIN -->
+	</section>
+	<!-- CONTENT -->
+	
+
+	<script src="{% static 'script.js' %}"></script>
+</body>
+</html>
