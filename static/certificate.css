@@ -1,0 +1,87 @@
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+
+/* Basic Styles */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  background-color: #f8f8f8;
+  
+  
+}
+
+header {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+nav {
+  background-color: #666;
+  padding: 10px 0;
+ 
+}
+
+nav ul {
+  list-style: none;
+  text-align: center;
+}
+
+nav ul li {
+  display: inline;
+  margin-right: 20px;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+main {
+  padding: 20px;
+ 
+  
+  
+  
+}
+
+section {
+  background-color: #e7d8d8;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-image: url('safety.jpg');
+  
+}
+
+h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+p {
+  color: #dc0b00;
+}
+
+ul {
+  margin-bottom: 15px;
+}
+
+ul li {
+  margin-bottom: 8px;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+}
+

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurant Fire Safety Certificates</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+    }
+    .container {
+      max-width: auto;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-image: url('/static/background.jpg');
+    }
+    h1 {
+      text-align: center;
+      color: #e9e4e4;
+    }
+    .certificate {
+      margin-bottom: 20px;
+      padding: 20px;
+      border: 1px solid #e83737;
+      border-radius: 8px;
+      background-color: #d4c2c2;
+
+    }
+    .certificate h2 {
+      margin-top: 0;
+      color: #333;
+    }
+    .certificate p {
+      margin: 10px 0;
+      color: #555;
+    }
+
+    /* Navbar container */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  font-family: Arial;
+}
+
+/* Links inside the navbar */
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* The dropdown container */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+/* Dropdown button */
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit; /* Important for vertical align on mobile phones */
+  margin: 0; /* Important for vertical align on mobile phones */
+}
+
+/* Add a red background color to navbar links on hover */
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* Add a grey background color to dropdown links on hover */
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header> <h1>Fire Safety Certificates</h1> </header>
+
+  <div class="navbar">
+    <a href="/home">Home</a>
+    <a href="/safety">Fire Safety</a>
+    <div class="dropdown">
+      <button class="dropbtn">News
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a href="https://www.thedailystar.net/" target="_blank">The Daily Star</a>
+        <a href="https://bangla.bdnews24.com/" target="_blank">bdnews24.com</a>
+        <a href="https://jamuna.tv/" target="_blank">Jamuna TV</a>
+      </div>
+    </div>
+  </div>
+  <br>
+  
+  {% for i in restaurants %}
+  <div class="certificate">
+    <h2>Certificate for {{i.commpanyName}}</h2>
+    <p>Certificate Number: FSC123456</p>
+    <p>Expiry Date: {{i.expiryDate}}</p>
+    <p>Issued By: FlameShield</p>
+  </div>
+{% endfor %}
+
+ 
+
+  
+  <!-- Add more certificates as needed -->
+
+</div>
+
+</body>
+</html>
